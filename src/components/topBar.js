@@ -8,6 +8,23 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 import Divider from '@mui/material/Divider';
+import HamMenu from './hamMenu';
+
+function detectMob() {
+    const toMatch = [
+        /Android/i,
+        /webOS/i,
+        /iPhone/i,
+        /iPad/i,
+        /iPod/i,
+        /BlackBerry/i,
+        /Windows Phone/i
+    ];
+
+    return toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem);
+    });
+}
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -53,7 +70,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function TopBar(props) {
     const { handleSearch } = props
     const navigate = useNavigate()
-
+    
+    const menuList = ['Favourites']
     const [searchTerm, setSearchTerm] = React.useState('');
     const debounceTimeoutRef = React.useRef(null);
 
@@ -88,14 +106,15 @@ export default function TopBar(props) {
                             MOVIE BROWSER
                         </Typography>
                         <Divider />
-                        <Typography
-                            noWrap
-                            component="div"
-                            sx={{ display: { xs: 'grid', sm: 'block' }, cursor: 'pointer' }}
-                            onClick={navigateToFavourites}
-                        >
-                            Favourites
-                        </Typography>
+                        {detectMob() ? <HamMenu menuItems={menuList} />
+                            : <Typography
+                                noWrap
+                                component="div"
+                                sx={{ display: { xs: 'grid', sm: 'block' }, cursor: 'pointer' }}
+                                onClick={navigateToFavourites}
+                            >
+                                Favourites
+                            </Typography>}
                         <Search>
                             <SearchIconWrapper>
                                 <SearchIcon />
