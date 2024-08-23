@@ -34,7 +34,7 @@ Create a new Pull Request.
 
 In the project directory, you can run:
 
-## npm start - Start the application in development mode.
-## npm run build - Create a production build of the application.
-## npm test - Run tests.
+### npm start - Start the application in development mode.
+### npm run build - Create a production build of the application.
+### npm test - Run tests.
 
